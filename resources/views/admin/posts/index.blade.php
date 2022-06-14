@@ -11,7 +11,8 @@
             <th scope="col">Content</th>
             {{-- <th scope="col">Image</th> --}}
             <th scope="col">Slug</th>
-            <th scope="col">Buttons</th>
+            <th scope="col">Tags</th>
+            <th scope="col" class="text-center">Buttons</th>
         </tr>
         </thead>
         <tbody>
@@ -22,6 +23,10 @@
                 <td>{{$post->content}}</td>
                 {{-- <td> <img src="{{$post->image}}" alt=""> </td> lorem picsum non va,rallenta caricamento --}} 
                 <td>{{$post->slug}}</td>
+                <td>
+                
+                </td>
+
                 <td class="d-flex">
                     <a href="{{route('admin.posts.show', $post->id)}}"class="btn btn-info">Show</a>
                     <a href="{{route('admin.posts.edit', $post->id)}}"class="btn btn-success mx-1">Edit</a>
