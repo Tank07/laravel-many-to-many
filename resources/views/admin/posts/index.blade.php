@@ -9,7 +9,7 @@
         <tr>
             <th scope="col">Title</th>
             <th scope="col">Content</th>
-            {{-- <th scope="col">Image</th> --}}
+            <th scope="col">Image</th>
             <th scope="col">Slug</th>
             <th scope="col">Tags</th>
             <th scope="col" class="text-center">Buttons</th>
@@ -21,8 +21,7 @@
             <tr>
                 <th scope="row">{{$post->title}}</th>
                 <td>{{$post->content}}</td>
-                {{-- <td> <img src="{{$post->image}}" alt=""> </td> lorem picsum non va,rallenta caricamento --}} 
-                <td>{{$post->slug}}</td>
+                <td> <img src="{{$post->image}}" alt=""> </td> 
                 <td>
                 
                 </td>

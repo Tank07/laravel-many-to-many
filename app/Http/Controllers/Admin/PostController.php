@@ -8,6 +8,7 @@ use App\Models\Post;
 use Illuminate\Support\Str;
 use App\Models\Category;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -50,6 +51,11 @@ class PostController extends Controller
         $post->save();
 
         if ( array_key_exists( 'tags', $data ) ) $post->tags()->attach($data['tags']);
+
+        if(array_key_exists('image', $data)){
+            $image_url = Storage::put('post_images', $data['image'] );
+            $data['image'] = $image_url;
+        }
 
         return redirect()-> route('admin.posts.index');
     }
@@ -96,6 +102,13 @@ class PostController extends Controller
         $post->update($data);
 
         if ( array_key_exists( 'tags', $data ) ) $post->tags()->sync( $data['tags'] );
+
+        if(array_key_exists('image', $data)){
+            if( $post->image ) Storage::delete($post->image);
+
+            $image_url = Storage::put('post_images', $data['image'] );
+            $data['image'] = $image_url;
+        }
 
         return redirect()-> route('admin.posts.show', $post);
     }
