@@ -14,9 +14,9 @@ class CategorySeeder extends Seeder
     {
         $categories = [
             [ 'label' => 'HTML', 'color' => 'danger' ],
-            [ 'label' => 'css', 'color' => 'primary' ],
-            [ 'label' => 'js', 'color' => 'info' ],
-            [ 'label' => 'laravel', 'color' => 'light' ],
+            [ 'label' => 'Css', 'color' => 'primary' ],
+            [ 'label' => 'Js', 'color' => 'info' ],
+            [ 'label' => 'Laravel', 'color' => 'danger' ],
         ];
 
         foreach($categories as $category){

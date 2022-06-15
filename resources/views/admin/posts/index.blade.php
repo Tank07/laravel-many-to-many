@@ -11,6 +11,7 @@
             <th scope="col">Content</th>
             <th scope="col">Image</th>
             <th scope="col">Slug</th>
+            <th scope="col">Category</th>
             <th scope="col">Tags</th>
             <th scope="col" class="text-center">Buttons</th>
         </tr>
@@ -22,7 +23,21 @@
                 <th scope="row">{{$post->title}}</th>
                 <td>{{$post->content}}</td>
                 <td> <img src="{{$post->image}}" alt=""> </td> 
+                <td class=" text-muted">{{$post->slug}}</td>
                 <td>
+                    @if( $post->category )
+                        <span class="badge badge-pill badge-{{$post->category->color}}">{{ $post->category->label}}</span>
+                    @else
+                        - null -
+                    @endif
+                </td>
+                <td>
+                    @forelse ($post->tags as $tag)
+                    <span class="badge badge-secondary">{{$tag->label}}</span>
+                        
+                    @empty
+                        - null -
+                    @endforelse
                 
                 </td>
 
