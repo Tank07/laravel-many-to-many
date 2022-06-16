@@ -28,7 +28,7 @@
                     @if( $post->category )
                         <span class="badge badge-pill badge-{{$post->category->color}}">{{ $post->category->label}}</span>
                     @else
-                        - null -
+                         null 
                     @endif
                 </td>
                 <td>
@@ -36,7 +36,7 @@
                     <span class="badge badge-secondary">{{$tag->label}}</span>
                         
                     @empty
-                        - null -
+                         null 
                     @endforelse
                 
                 </td>
