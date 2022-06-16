@@ -8,7 +8,13 @@ use App\Models\Post;
 use Illuminate\Support\Str;
 use App\Models\Category;
 use App\Models\Tag;
+
 use Illuminate\Support\Facades\Storage;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendNewMail;
+
 
 class PostController extends Controller
 {
@@ -44,6 +50,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data =$request->all();
+        $user = Auth::user();
         $post= new Post();
 
         $post->fill($data);
@@ -56,6 +63,10 @@ class PostController extends Controller
             $image_url = Storage::put('post_images', $data['image'] );
             $data['image'] = $image_url;
         }
+
+        // Come ultimo processo la creazione mail
+        $mail = new SendNewMail( $post );
+        Mail::to($user->email)->send($mail);
 
         return redirect()-> route('admin.posts.index');
     }
