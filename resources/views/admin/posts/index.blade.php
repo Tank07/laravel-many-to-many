@@ -22,7 +22,7 @@
             <tr>
                 <th scope="row">{{$post->title}}</th>
                 <td>{{$post->content}}</td>
-                <td> <img src="{{$post->image}}" alt="" style="width: 50px; height: 50px;"> </td> 
+                <td> <img src="{{ asset("storage/$post->image") }}" alt="" style="width: 50px; height: 50px;"> </td> 
                 <td class=" text-muted">{{$post->slug}}</td>
                 <td>
                     @if( $post->category )
