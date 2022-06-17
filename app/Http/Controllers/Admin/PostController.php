@@ -53,16 +53,16 @@ class PostController extends Controller
         $user = Auth::user();
         $post= new Post();
 
+        if(array_key_exists('image', $data)){
+            $image_url = Storage::put('post_images', $data['image'] );
+            $data['image'] = $image_url;
+        }
+
         $post->fill($data);
         $post->slug = Str::slug($post->title, '-');
         $post->save();
 
         if ( array_key_exists( 'tags', $data ) ) $post->tags()->attach($data['tags']);
-
-        if(array_key_exists('image', $data)){
-            $image_url = Storage::put('post_images', $data['image'] );
-            $data['image'] = $image_url;
-        }
 
         // Come ultimo processo la creazione mail
         $mail = new SendNewMail( $post );
@@ -109,16 +109,18 @@ class PostController extends Controller
     {
         $data =$request->all();
 
-        $post->slug = Str::slug($request->title, '-');
-        $post->update($data);
-
-        if ( array_key_exists( 'tags', $data ) ) $post->tags()->sync( $data['tags'] );
-
         if(array_key_exists('image', $data)){
             if( $post->image ) Storage::delete($post->image);
 
             $image_url = Storage::put('post_images', $data['image'] );
             $data['image'] = $image_url;
+
+        $post->slug = Str::slug($request->title, '-');
+        $post->update($data);
+
+        if ( array_key_exists( 'tags', $data ) ) $post->tags()->sync( $data['tags'] );
+
+      
         }
 
         return redirect()-> route('admin.posts.show', $post);
